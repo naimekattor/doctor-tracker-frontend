@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest-dark: #001E2B;
+  --color-primary: #00D084;
+  --color-neon-start: #00D084;
+  --color-neon-mid: #05B978;
+  --color-neon-end: #029E65;
+  --color-capsule-track: #0E1215;
+  --color-capsule-btn: #181E23;
+  --color-dark-accent: #023430;
+  --color-canvas: #F9FBFA;
+  --color-surface: #FFFFFF;
+  --color-border: #E8EDEB;
+  --color-muted: #5C768D;
+  --color-text-main: #1C2D38;
+  --color-danger: #CF3B3B;
+  --color-warning: #E68B00;
+  --color-deep-interactive: #00684A;
+}
+
+:root {
+  --forest-dark: #001E2B;
+  --primary: #00D084;
+  --neon-start: #00D084;
+  --neon-mid: #05B978;
+  --neon-end: #029E65;
+  --capsule-track: #0E1215;
+  --capsule-btn: #181E23;
+  --dark-accent: #023430;
+  --canvas: #F9FBFA;
+  --surface: #FFFFFF;
+  --border: #E8EDEB;
+  --muted: #5C768D;
+  --text-main: #1C2D38;
+  --danger: #CF3B3B;
+  --warning: #E68B00;
+  --deep-interactive: #00684A;
+}
+
+/* Soothing Medical Mint Pill Utility Classes */
+.btn-neon-pill {
+  background: linear-gradient(135deg, #00D084 0%, #05B978 50%, #029E65 100%);
+  color: #03231A;
+  font-weight: 700;
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 208, 132, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-neon-pill:hover {
+  box-shadow: 0 4px 22px rgba(158, 255, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-neon-pill:active {
+  box-shadow: 0 1px 8px rgba(158, 255, 0, 0.25);
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Emerald Dark Gradient Button (#0C2B24) with 6px radius */
+.btn-emerald-gradient {
+  background: linear-gradient(135deg, #0C2B24 0%, #164E41 50%, #0A241E 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #1E584B;
+  box-shadow: 0 2px 10px rgba(12, 43, 36, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-emerald-gradient:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 4px 16px rgba(12, 43, 36, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-emerald-gradient:active {
+  filter: brightness(0.95);
+  transform: translateY(0px) scale(0.98);
+}
+
+.capsule-track {
+  background: linear-gradient(135deg, #0C2B24 0%, #133E34 50%, #0A241E 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.capsule-btn-inactive {
+  background-color: #081F1A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #8EAAA2;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+.capsule-btn-inactive:hover {
+  background-color: #0F322A;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.03);
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--text-main);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbars for clean dashboard view */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #E8EDEB;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5C768D;
+}
