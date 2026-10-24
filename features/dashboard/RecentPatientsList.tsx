@@ -26,23 +26,7 @@ export function RecentPatientsList({
   isRefreshing = false,
 }: RecentPatientsListProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeToggles, setActiveToggles] = useState<Record<string, boolean>>(() => {
-    // Default all current patients to active (true)
-    const initial: Record<string, boolean> = {};
-    patients.forEach((p, idx) => {
-      initial[p._id] = idx % 5 !== 4; // realistic variety
-    });
-    return initial;
-  });
-
   const [selectedIds, setSelectedIds] = useState<Record<string, boolean>>({});
-
-  const togglePatientActive = (id: string) => {
-    setActiveToggles((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
 
   const toggleSelect = (id: string) => {
     setSelectedIds((prev) => ({
@@ -138,20 +122,18 @@ export function RecentPatientsList({
                 <th className="py-2.5 px-3">Age / Gender</th>
                 <th className="py-2.5 px-3">Condition</th>
                 <th className="py-2.5 px-3">Assigned Doctor</th>
-                <th className="py-2.5 px-3 text-right">Active</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50 text-gray-700">
               {filteredPatients.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-8 text-center text-gray-400">
+                  <td colSpan={5} className="py-8 text-center text-gray-400">
                     No matching patient records found.
                   </td>
                 </tr>
               ) : (
                 filteredPatients.slice(0, 6).map((patient, idx) => {
                   const doc = typeof patient.doctor === 'object' ? patient.doctor : null;
-                  const isActive = activeToggles[patient._id] ?? true;
                   const isSelected = selectedIds[patient._id] ?? false;
 
                   // Initials for avatar
@@ -230,26 +212,6 @@ export function RecentPatientsList({
                         ) : (
                           <span className="text-gray-400">Unassigned</span>
                         )}
-                      </td>
-
-                      {/* Active Toggle Switch */}
-                      <td className="py-3 px-3 text-right">
-                        <button
-                          type="button"
-                          role="switch"
-                          aria-checked={isActive}
-                          onClick={() => togglePatientActive(patient._id)}
-                          className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-1 focus:ring-[#00D084] ${
-                            isActive ? 'bg-[#00D084]' : 'bg-gray-200'
-                          }`}
-                        >
-                          <span
-                            aria-hidden="true"
-                            className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out ${
-                              isActive ? 'translate-x-4' : 'translate-x-0'
-                            }`}
-                          />
-                        </button>
                       </td>
                     </tr>
                   );
