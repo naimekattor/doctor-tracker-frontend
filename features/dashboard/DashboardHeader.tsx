@@ -99,7 +99,7 @@ export function DashboardHeader({ stats, onRefresh }: DashboardHeaderProps) {
         </div>
 
         {/* Info Button with diagnostics modal */}
-        <div className="relative">
+        {/* <div className="relative">
           <button
             onClick={() => setShowInfo(!showInfo)}
             title="System Diagnostics"
@@ -121,7 +121,7 @@ export function DashboardHeader({ stats, onRefresh }: DashboardHeaderProps) {
               </p>
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Export Button with #0C2B24 Linear Gradient & 6px Radius */}
         <button
