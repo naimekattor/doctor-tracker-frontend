@@ -16,7 +16,7 @@ import { ConditionBadge } from '@/components/ui/Badge';
 import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deletePatient } from '@/lib/api/patients';
-import { Edit2, Trash2, Phone, Stethoscope, AlertCircle } from 'lucide-react';
+import { Edit2, Trash2, Phone, Stethoscope, AlertCircle, Eye } from 'lucide-react';
 
 interface PatientTableProps {
   patients: Patient[];
@@ -83,8 +83,13 @@ export function PatientTable({ patients, onEditPatient }: PatientTableProps) {
 
             return (
               <TableRow key={patient._id}>
-                <TableCell className="font-semibold text-[#1C2D38]">
-                  {patient.name}
+                <TableCell>
+                  <Link
+                    href={`/patients/${patient._id}`}
+                    className="font-semibold text-[#1C2D38] hover:text-[#00684A] hover:underline flex items-center gap-1.5"
+                  >
+                    {patient.name}
+                  </Link>
                 </TableCell>
 
                 <TableCell className="text-[#5C768D]">
@@ -122,6 +127,15 @@ export function PatientTable({ patients, onEditPatient }: PatientTableProps) {
 
                 <TableCell className="text-right">
                   <div className="flex items-center justify-end gap-1.5">
+                    <Link href={`/patients/${patient._id}`}>
+                      <Button
+                        variant="ghost"
+                        className="h-8 w-8 p-0"
+                        title="View Patient Profile & Medical Details"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                    </Link>
                     <Button
                       variant="ghost"
                       onClick={() => onEditPatient(patient)}
