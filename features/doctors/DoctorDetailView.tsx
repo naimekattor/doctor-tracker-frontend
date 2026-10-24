@@ -84,7 +84,7 @@ export function DoctorDetailView({ id }: DoctorDetailViewProps) {
       </div>
 
       {/* Doctor Profile Summary Card */}
-      <Card className="border-t-4 border-t-[#00ED64]">
+      <Card className="">
         <CardHeader>
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div>
@@ -102,7 +102,7 @@ export function DoctorDetailView({ id }: DoctorDetailViewProps) {
 
             {/* Total Patient Load Badge */}
             <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#F9FBFA] border border-[#E8EDEB]">
-              <div className="p-2 rounded-lg bg-[#00ED64]/20 text-[#00684A]">
+              <div className="p-2 rounded-lg bg-white border border-[rgba(0,0,0,0.10)] text-[#00A86B] shadow-2xs">
                 <Users className="h-5 w-5" />
               </div>
               <div>
