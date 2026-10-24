@@ -55,6 +55,7 @@ export function PatientModal({
     condition: 'Stable',
     contactPhone: '',
     doctor: fixedDoctorId || '',
+    notes: '',
   });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -73,6 +74,7 @@ export function PatientModal({
         condition: patientToEdit.condition,
         contactPhone: patientToEdit.contactPhone,
         doctor: docId || fixedDoctorId || '',
+        notes: patientToEdit.notes || '',
       });
     } else {
       setFormData({
@@ -82,6 +84,7 @@ export function PatientModal({
         condition: 'Stable',
         contactPhone: '',
         doctor: fixedDoctorId || '',
+        notes: '',
       });
     }
     setErrorMessage(null);
@@ -98,6 +101,9 @@ export function PatientModal({
       queryClient.invalidateQueries({ queryKey: ['patients'] });
       queryClient.invalidateQueries({ queryKey: ['analytics'] });
       queryClient.invalidateQueries({ queryKey: ['doctors'] });
+      if (patientToEdit) {
+        queryClient.invalidateQueries({ queryKey: ['patient', patientToEdit._id] });
+      }
       if (fixedDoctorId) {
         queryClient.invalidateQueries({ queryKey: ['doctor', fixedDoctorId] });
       }
@@ -213,6 +219,19 @@ export function PatientModal({
             </select>
           </div>
         )}
+
+        <div>
+          <label className="text-sm font-medium text-[#1C2D38] block mb-1.5">
+            Clinical / Medical Notes <span className="text-xs text-gray-400 font-normal">(Optional)</span>
+          </label>
+          <textarea
+            rows={3}
+            placeholder="Enter clinical observations, treatment protocol, or medical history..."
+            value={formData.notes || ''}
+            onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+            className="w-full rounded-[6px] border border-[#E8EDEB] bg-white px-3 py-2 text-[14px] text-[#1C2D38] placeholder-gray-400 focus:border-[#00684A] focus:outline-none focus:ring-2 focus:ring-[#00ED64]/25 transition-all resize-y"
+          />
+        </div>
 
         <div className="flex justify-end gap-3 pt-4 border-t border-[#E8EDEB]">
           <Button type="button" variant="secondary" onClick={onClose}>
