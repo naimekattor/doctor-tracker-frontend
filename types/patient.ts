@@ -11,6 +11,13 @@ export type PatientCondition =
   | 'Routine Checkup'
   | string;
 
+export interface ConditionHistoryItem {
+  _id?: string;
+  condition: PatientCondition;
+  notes?: string;
+  recordedAt: string;
+}
+
 export interface Patient {
   _id: string;
   name: string;
@@ -19,6 +26,8 @@ export interface Patient {
   condition: PatientCondition;
   contactPhone: string;
   doctor: string | Doctor;
+  notes?: string;
+  conditionHistory?: ConditionHistoryItem[];
   createdAt: string;
   updatedAt: string;
 }
@@ -30,6 +39,7 @@ export interface PatientInput {
   condition: PatientCondition;
   contactPhone: string;
   doctor: string;
+  notes?: string;
 }
 
 export interface PatientQueryParams {
