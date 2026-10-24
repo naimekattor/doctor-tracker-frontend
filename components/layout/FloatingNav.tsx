@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Calendar, Bell, Users, Stethoscope, LayoutDashboard } from 'lucide-react';
+import { LayoutDashboard, Stethoscope, Users } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 
 interface NavItem {
@@ -13,9 +13,9 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { name: 'Home', href: '/dashboard', icon: Home },
-  { name: 'Doctors', href: '/doctors', icon: Calendar },
-  { name: 'Patients', href: '/patients', icon: Bell },
+  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Doctors', href: '/doctors', icon: Stethoscope },
+  { name: 'Patients', href: '/patients', icon: Users },
 ];
 
 export function FloatingNav() {
@@ -24,10 +24,10 @@ export function FloatingNav() {
   return (
     <nav
       aria-label="Floating Segmented Navigation"
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 select-none animate-in fade-in slide-in-from-bottom-4 duration-300"
+      className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 select-none animate-in fade-in slide-in-from-bottom-4 duration-300"
     >
       {/* Button Capsule Track Container with #0C2B24 Linear Gradient */}
-      <div className="flex items-center gap-2 p-1.5 rounded-[8px] bg-gradient-to-r from-[#0C2B24] via-[#133E34] to-[#0A241E] border border-[#1E5246] backdrop-blur-2xl shadow-[0_12px_45px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.15)]">
+      <div className="flex items-center gap-2 px-2 py-2 rounded-[8px] bg-gradient-to-r from-[#0C2B24] via-[#133E34] to-[#0A241E] border border-[#1E5246] backdrop-blur-2xl shadow-[0_12px_45px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.15)]">
         {NAV_ITEMS.map((item) => {
           const isActive =
             pathname === item.href ||
