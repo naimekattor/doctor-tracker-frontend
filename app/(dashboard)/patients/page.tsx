@@ -89,10 +89,14 @@ function PatientsContent() {
           </Subheading>
         </div>
 
-        <Button variant="primary" onClick={handleOpenAddModal} className="shrink-0 shadow-xs">
-          <Plus className="h-4 w-4 mr-1.5" />
-          Add Patient
-        </Button>
+        <button
+          type="button"
+          onClick={handleOpenAddModal}
+          className="h-10 px-4 rounded-[6px] inline-flex items-center justify-center gap-2 text-sm font-semibold  bg-[#02634c] text-[#ffffff] shadow-[0_2px_12px_rgba(0,208,132,0.25)] border border-[#24705e] transition-all duration-300 ease-out hover:brightness-105 shrink-0 cursor-pointer"
+        >
+          <Plus className="h-4 w-4" />
+          <span>Add Patient</span>
+        </button>
       </div>
 
       {/* Filter and Search Bar */}
