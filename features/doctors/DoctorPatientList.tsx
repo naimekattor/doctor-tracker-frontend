@@ -13,13 +13,15 @@ import {
 } from '@/components/ui/Table';
 import { Button } from '@/components/ui/Button';
 import { ConditionBadge } from '@/components/ui/Badge';
+import { Pagination } from '@/components/ui/Pagination';
 import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { PatientModal } from '@/features/patients/PatientModal';
 import { TableSkeleton } from '@/components/shared/LoadingState';
 import { EmptyState } from '@/components/shared/EmptyState';
 import { ErrorState } from '@/components/shared/ErrorState';
 import { Patient } from '@/types/patient';
-import { UserPlus, Trash2, Phone, Users } from 'lucide-react';
+import Link from 'next/link';
+import { UserPlus, Trash2, Phone, Users, Eye } from 'lucide-react';
 
 interface DoctorPatientListProps {
   doctorId: string;
@@ -28,15 +30,19 @@ interface DoctorPatientListProps {
 
 export function DoctorPatientList({ doctorId, doctorName }: DoctorPatientListProps) {
   const queryClient = useQueryClient();
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const [isAddPatientModalOpen, setIsAddPatientModalOpen] = useState(false);
   const [patientToDelete, setPatientToDelete] = useState<Patient | null>(null);
 
   const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ['patients', { doctor: doctorId }],
-    queryFn: () => getPatients({ doctor: doctorId, limit: 50 }),
+    queryKey: ['patients', { doctor: doctorId, page, limit }],
+    queryFn: () => getPatients({ doctor: doctorId, page, limit }),
   });
 
   const patients = data?.data || [];
+  const total = data?.total || 0;
+  const totalPages = data?.totalPages || 1;
 
   const deleteMutation = useMutation({
     mutationFn: (patientId: string) => deletePatient(patientId),
@@ -96,52 +102,79 @@ export function DoctorPatientList({ doctorId, doctorName }: DoctorPatientListPro
               onAction={() => setIsAddPatientModalOpen(true)}
             />
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Patient Name</TableHead>
-                  <TableHead>Demographics</TableHead>
-                  <TableHead>Condition</TableHead>
-                  <TableHead>Contact Phone</TableHead>
-                  <TableHead>Admitted</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {patients.map((patient) => (
-                  <TableRow key={patient._id}>
-                    <TableCell className="font-medium text-[#1C2D38]">
-                      {patient.name}
-                    </TableCell>
-                    <TableCell className="text-[#5C768D]">
-                      {patient.age} yrs • {patient.gender}
-                    </TableCell>
-                    <TableCell>
-                      <ConditionBadge condition={patient.condition} />
-                    </TableCell>
-                    <TableCell className="text-[#5C768D] font-mono text-xs">
-                      <div className="flex items-center gap-1.5">
-                        <Phone className="h-3 w-3 text-[#5C768D]/70" />
-                        <span>{patient.contactPhone}</span>
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-[#5C768D] text-xs">
-                      {new Date(patient.createdAt).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Button
-                        variant="ghost"
-                        onClick={() => setPatientToDelete(patient)}
-                        className="h-8 w-8 p-0 text-[#CF3B3B] hover:text-[#CF3B3B] hover:bg-[#CF3B3B]/10"
-                        title="Remove Patient Record"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </TableCell>
+            <div className="space-y-4">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Patient Name</TableHead>
+                    <TableHead>Demographics</TableHead>
+                    <TableHead>Condition</TableHead>
+                    <TableHead>Contact Phone</TableHead>
+                    <TableHead>Admitted</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {patients.map((patient) => (
+                    <TableRow key={patient._id}>
+                      <TableCell>
+                        <Link
+                          href={`/patients/${patient._id}`}
+                          className="font-medium text-[#1C2D38] hover:text-[#00684A] hover:underline"
+                        >
+                          {patient.name}
+                        </Link>
+                      </TableCell>
+                      <TableCell className="text-[#5C768D]">
+                        {patient.age} yrs • {patient.gender}
+                      </TableCell>
+                      <TableCell>
+                        <ConditionBadge condition={patient.condition} />
+                      </TableCell>
+                      <TableCell className="text-[#5C768D] font-mono text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <Phone className="h-3 w-3 text-[#5C768D]/70" />
+                          <span>{patient.contactPhone}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-[#5C768D] text-xs">
+                        {new Date(patient.createdAt).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <Link href={`/patients/${patient._id}`}>
+                            <Button
+                              variant="ghost"
+                              className="h-8 w-8 p-0"
+                              title="View Patient Profile"
+                            >
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                          </Link>
+                          <Button
+                            variant="ghost"
+                            onClick={() => setPatientToDelete(patient)}
+                            className="h-8 w-8 p-0 text-[#CF3B3B] hover:text-[#CF3B3B] hover:bg-[#CF3B3B]/10"
+                            title="Remove Patient Record"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+
+              <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                totalRecords={total}
+                limit={limit}
+                onPageChange={setPage}
+                onLimitChange={setLimit}
+              />
+            </div>
           )}
         </>
       )}
