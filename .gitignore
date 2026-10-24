@@ -44,3 +44,11 @@ next-env.d.ts
 # generated agent files
 AGENTS.md
 CLAUDE.md
+
+# Playwright E2E Tests & Artifacts (kept in gitignore per requirement)
+e2e/
+playwright-report/
+test-results/
+playwright.config.*
+.auth/
+run-tests.js
