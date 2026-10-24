@@ -20,7 +20,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants: Record<ButtonVariant, string> = {
       primary:
-        'bg-gradient-to-r from-[#0C2B24] via-[#164E41] to-[#0A241E] text-white font-semibold shadow-sm hover:brightness-115 hover:shadow-md hover:scale-[1.01] active:scale-[0.98] border border-[#1E584B] rounded-[6px]',
+        'bg-[#02634c] text-white font-semibold shadow-sm hover:brightness-115 hover:shadow-md hover:scale-[1.01] active:scale-[0.98] border border-[#1E584B] rounded-[6px]',
       neon:
         'bg-gradient-to-r from-[#00D084] via-[#05B978] to-[#029E65] text-[#03231A] font-bold shadow-[0_2px_12px_rgba(0,208,132,0.25)] hover:brightness-105 hover:scale-[1.01] active:scale-[0.98] border border-white/20 rounded-[6px]',
       capsule:
