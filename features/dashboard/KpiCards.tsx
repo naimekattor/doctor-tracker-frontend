@@ -79,7 +79,7 @@ export function KpiCards({ stats }: KpiCardsProps) {
                 <span className="text-[11px] font-semibold tracking-wider text-gray-500 uppercase">
                   {card.label}
                 </span>
-                <div className="w-8 h-8 rounded-[6px] bg-[#E8FAF2] text-[#00A86B] flex items-center justify-center transition-transform group-hover:scale-105">
+                <div className="w-8 h-8 rounded-[6px] bg-white border border-[rgba(0,0,0,0.10)] text-[#00A86B] flex items-center justify-center shadow-2xs transition-transform group-hover:scale-105">
                   <Icon className="h-4 w-4 stroke-[2.2]" />
                 </div>
               </div>
