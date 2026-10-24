@@ -224,7 +224,7 @@ export function AdmissionsTrendChart({
               </div>
             </div>
 
-            <div className="w-9 h-9 rounded-[6px] bg-[#E8FAF2] text-[#00A86B] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-[6px] bg-white border border-[rgba(0,0,0,0.10)] text-[#00A86B] flex items-center justify-center shadow-2xs">
               <Activity className="h-5 w-5 stroke-[2]" />
             </div>
           </div>
