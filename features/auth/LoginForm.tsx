@@ -79,7 +79,7 @@ export function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@doctortracker.com"
-              className="h-[40px] w-full rounded-[6px] border border-[#E8EDEB] bg-white pl-9 pr-3 text-[14px] text-[#1C2D38] placeholder:text-[#5C768D]/60 focus:border-[#00684A] focus:outline-none focus:ring-2 focus:ring-[#00ED64]/25"
+              className="h-[40px] w-full rounded-[6px] border border-[#E8EDEB] bg-white pl-9 pr-3 text-[14px] text-[#1C2D38] placeholder:text-[#5C768D]/60 focus:border-[#02634c] focus:outline-none focus:ring-2 focus:ring-[#00D084]/20"
             />
           </div>
         </div>
@@ -96,7 +96,7 @@ export function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="h-[40px] w-full rounded-[6px] border border-[#E8EDEB] bg-white pl-9 pr-3 text-[14px] text-[#1C2D38] placeholder:text-[#5C768D]/60 focus:border-[#00684A] focus:outline-none focus:ring-2 focus:ring-[#00ED64]/25"
+              className="h-[40px] w-full rounded-[6px] border border-[#E8EDEB] bg-white pl-9 pr-3 text-[14px] text-[#1C2D38] placeholder:text-[#5C768D]/60 focus:border-[#02634c] focus:outline-none focus:ring-2 focus:ring-[#00D084]/20"
             />
           </div>
         </div>
@@ -105,7 +105,7 @@ export function LoginForm() {
           type="submit"
           variant="primary"
           isLoading={isLoading}
-          className="w-full mt-3 h-[46px] text-[15px] font-bold rounded-[6px] shadow-[0_4px_20px_rgba(158,255,0,0.38)]"
+          className="w-full mt-3 h-[46px] text-[15px] font-bold rounded-[6px] bg-[#02634c] text-[#ffffff] shadow-[0_2px_12px_rgba(0,208,132,0.25)] border border-[#24705e] transition-all duration-300 ease-out hover:brightness-105 active:scale-[0.99] cursor-pointer"
         >
           Sign In to Portal
         </Button>
